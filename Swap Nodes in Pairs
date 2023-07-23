@@ -1,0 +1,46 @@
+Question 11: Swap Nodes in Pairs
+
+Skill Mapping: Basic
+
+Description: Solve the LeetCode Problem given as a link below -
+https://leetcode.com/problems/swap-nodes-in-pairs/
+
+package hero_vired;
+
+public class LL_swap_two {
+	/**
+	 * Definition for singly-linked list.
+	 */public class ListNode {
+	      int val;
+	      ListNode next;
+	     ListNode() {}
+	      ListNode(int val) { this.val = val; }
+	      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+	  }
+	 
+	
+	 public ListNode swapPairs(ListNode head) {
+	        ListNode c1=head;       
+	        if(head==null || head.next==null){        //cant read next when next point to null                                                     //so handle it like this
+	            return head;
+	        }
+	        ListNode p1=c1.next;
+	        int t;
+	        
+	        while(c1.next !=null){                 //just swap values
+	            t=p1.val;
+	            p1.val=c1.val;
+	            c1.val=t;
+	            
+	            c1=p1.next;                 //if p1 is last node then cant get c1.next to p1 
+	            if(c1==null)                //so handle like this
+	                break;
+	            
+	            p1=c1.next;
+	            
+	          
+	        }
+	        return head;
+	    }
+	}
+
