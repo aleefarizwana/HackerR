@@ -1,0 +1,85 @@
+Question 6: Remove Duplicates from Linked-List
+
+Skill Mapping: Intermediate
+Description: Consider a Linked-List with N number of repeated integers in Data-Node.
+Task - WAP in Java to remove the repeated integer numbers from Linked-List.
+Sample input: Linked-List:- 2->5->12->2->3->5->1->2->5->5
+Output:- 2->5->12->3->1
+
+
+package hackerRank;
+public class LL_Rm_Repeated {
+	static class ListNode{
+		int val;
+		ListNode next;
+		
+		ListNode(int val){
+			this.val=val;
+		}
+	}
+	public static ListNode repeatedLL(ListNode head) {
+		ListNode prev=null;
+		ListNode curr =head;
+		ListNode cur1=null;
+		while(curr!=null) {
+			cur1=curr.next;
+			while(cur1!=null) {
+		//		System.out.println(curr.val+" "+cur1.val);
+				if(curr.val==cur1.val)
+					prev.next=cur1.next;
+				prev=cur1;                         //store prev node bcz it helps to change link to cur.next.next node when cur.next(immediate) node is same as current node
+				cur1=cur1.next;
+			}
+			curr=curr.next;
+		 }
+		return head;
+		}
+	public static void printLL(ListNode head) {
+		ListNode curr=head;
+		while(curr!=null) {
+			System.out.print(curr.val+" -> ");
+			curr=curr.next;
+		}
+		System.out.println("null");
+	}
+	public static void main(String args[]) {
+		ListNode head=new ListNode(6);
+		head.next=new ListNode(2);
+		head.next.next=new ListNode(5);
+		head.next.next.next=new ListNode(2);
+		head.next.next.next.next=new ListNode(3);
+		head.next.next.next.next.next=new ListNode(4);
+		head.next.next.next.next.next.next=new ListNode(6);
+		System.out.println("Original Linked List : ");
+		printLL(head);
+		
+		ListNode rmHead=repeatedLL(head);
+		System.out.println("After removing repeated elements in LL");
+		printLL(rmHead);
+		
+	}
+	
+}
+
+//OUTPUT
+//Original Linked List : 
+//6 -> 2 -> 5 -> 2 -> 3 -> 4 -> 6 -> null
+//After removing repeated elements in LL
+//6 -> 2 -> 5 -> 3 -> 4 -> null
+
+
+//     BELOW ARE THE STEP BY STEP COMPARISIONS THAT OCCUR FOR EACH ELEMENT IN THE LINKED LIST
+//System.out.println(curr.val+" "+cur1.val);
+//6 2
+//6 5
+//6 2
+//6 3
+//6 4
+//6 6
+//2 5
+//2 2
+//2 3
+//2 4
+//5 3
+//5 4
+//3 4
