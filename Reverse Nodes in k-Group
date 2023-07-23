@@ -1,0 +1,49 @@
+Question 12: Reverse Nodes in k-Group
+
+Skill Mapping: Basic
+
+Description: Solve the LeetCode Problem given as a link below -
+
+https://leetcode.com/problems/reverse-nodes-in-k-group/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode n1 = new ListNode(-1);                       //take a new node
+        n1.next = head;                                         //make it as first node
+        ListNode pointer = n1;                                 
+        
+        while (pointer != null) {
+            ListNode node = pointer;
+            for (int i = 0; i < k && node != null; i++)
+                node = node.next;                               //traverse till kth node
+            if (node == null)                                 //if there no nodes till k then break
+                break;
+            
+                                                                   //to reverse the k nodes
+            ListNode prev = null, curr = pointer.next;              //curr=n1
+            for (int i = 0; i < k; i++) {
+                ListNode next = curr.next;                          //next= address of next node
+                curr.next = prev;                                   //make curr as last(null)
+                prev = curr;                                       //making link reverse
+                curr = next;
+            }
+            
+            ListNode tail = pointer.next;                       
+            tail.next = curr;
+            pointer.next = prev;
+            pointer = tail;
+        }
+        
+        return n1.next;
+    }
+}
